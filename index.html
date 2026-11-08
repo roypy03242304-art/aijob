@@ -115,6 +115,15 @@
   .memo-has{color:var(--accent2)}
   .empty{text-align:center;color:var(--muted);padding:60px 20px}
   h2{font-size:16px;margin:28px 0 12px;letter-spacing:-.3px}
+  .school{border:2px solid var(--accent);border-radius:14px;padding:14px 16px;margin:14px 0 18px;background:var(--panel)}
+  .school h2{margin:0 0 4px;font-size:17px}
+  .school .snote{color:var(--muted);font-size:12.5px;margin:0 0 10px;line-height:1.55}
+  .school h3{font-size:13.5px;margin:14px 0 8px}
+  .school .sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+  .school .none{grid-column:1/-1;padding:12px 14px;border:1px dashed var(--line);border-radius:10px;color:var(--muted);font-size:13px;line-height:1.6}
+  .school .card.hot{border-color:var(--accent2);box-shadow:0 0 0 2px var(--accent2) inset}
+  .school .work{font-size:12px;color:var(--muted)}
+  .school details summary{cursor:pointer;font-size:13.5px;font-weight:700;margin:14px 0 8px}
   .srcgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
   .src{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
     text-decoration:none;display:block;transition:.15s;box-shadow:var(--shadow)}
@@ -164,6 +173,18 @@
 <div class="wrap">
   <div class="tabs" id="tabs"></div>
   <div class="stats" id="stats"></div>
+
+  <section class="school" id="school">
+    <h2>🏫 학교 AI교육 코디네이터 · 디지털튜터 — 최우선</h2>
+    <p class="snote">학교에서 직접 뽑는 AI코디·디지털튜터·스마트튜터만 따로 모았습니다. <b>올해 안에 뽑아서 일하는 공고가 뜨면 맨 위에 🔥로 표시</b>되고 바로 지원 대상입니다. 아래 「학교 공고 소스」는 매일 전부 확인하고, 새 소스도 매일 찾아 추가합니다.</p>
+    <h3>🔥 지금 지원 가능</h3>
+    <div class="sgrid" id="schoolOpen"></div>
+    <h3>📌 상시 등록 · 시기 메모</h3>
+    <div class="sgrid" id="schoolAlways"></div>
+    <details><summary id="schoolPastSum">🗂 지난 학교 공고</summary><div class="sgrid" id="schoolPast"></div></details>
+    <h3>🔎 학교 공고 소스 — 매일 확인</h3>
+    <div class="srcgrid" id="schoolSources"></div>
+  </section>
 
   <div class="note">
     <b>만 44세 · 서울/경기/인천</b> 기준으로 지원 가능한 건만 남겼습니다. 비수도권 공고와 연령 미달 공고는 제외했어요 — 특히 <b>어디나지원단(서울디지털재단)은 만 55세 이상</b> 조건이라 빠졌습니다. 남은 공고는 모두 연령 제한이 없거나 조건을 충족합니다.<br><br>
@@ -233,11 +254,11 @@ const TODAY = new Date(new Date().toDateString());
 
 /* ── 시드 데이터: 2026-08-12 기준 웹 수집 ── */
 /* 마지막 갱신 시각 (KST) — 매일 갱신 작업이 커밋 직전에 이 값을 바꿈 */
-const UPDATED_AT = '2026-11-08 08:57';
+const UPDATED_AT = '2026-11-08 18:41';
 
 const SEED = [
 {"kind": "교육", "field": "AI·SW", "age": "연령 무관", "role": "양성과정", "added": "2026-11-06", "id": "c90", "intake": "aice.study 온라인 접수 11/23(월)~12/11(금) · 응시료 약 5만원 · 접수 기간 중 취소 100% 환불, 접수 마감 후~시험 5일 전 50%, 시험 4일 전부터 불가", "title": "🎓 AICE Basic 자격시험 6회 — 12/18(금) 10시 또는 14시 · 온라인 60분 · 접수 11/23~12/11 · 약 5만원", "org": "KT · 한국경제신문 (AICE)", "region": "전국·온라인", "deadline": "2026-12-11", "pay": "응시료 약 50,000원 (공식 사이트에서 최종 확인)", "tags": ["✅거리예외", "100%온라인", "자격증", "AICE", "노코딩", "IT자격증", "화목0회"], "url": "https://aice.study/certi/examSchedule", "desc": "✅ 화·목 0회 — 시험일 12/18(금), 시각 10:00 또는 14:00 중 선택, 온라인 응시 60분. 결과 발표 2027-01-02(토). 2026년 Basic 마지막 회차(6회)이고, 다음은 2027년 1회(2026년 기준으로는 2월 초 접수·2월 말 시험이었음). ■ 시험 내용: 코딩 없이 AIDU ez 도구로 데이터를 불러와 전처리하고 AI 모델을 만들고 결과를 해석하는 실습형. 생성형 AI 활용 시험은 아님 — 이력서의 「IT자격증」 칸을 채우는 용도이고, 실제 강의 내용(AI 홍보물·SNS 콘텐츠)과는 별개. ■ 준비: aice.study 사이트의 「AI 학습」 메뉴에서 학습 콘텐츠를 볼 수 있음(무료 여부·범위는 로그인 후 확인 필요). 1~2주 정도 도구를 직접 만져 보는 수준으로 준비하는 사람이 많음. ■ 무료 대비 과정: 11/06 검색 기준 서울에서 일반 성인이 들을 수 있는 무료 과정은 못 찾음(서초구 AICE 과정은 청년 대상, 경기도일자리재단 과정은 경기도민 대상). ■ 일정상 디지털튜터 대면연수(11/7)가 끝난 뒤라 겹치지 않음. 국가공인은 상위 등급 Associate(Python 실기)만 해당."},
-{"kind": "채용", "field": "AI·SW", "age": "✅ 재직 중 가능 (주 12시간 안팎 시간제)", "role": "강사", "added": "2026-11-07", "id": "c91", "title": "📊 [시기 메모] 학교 AI교육 코디네이터 — 올해 서울 46건 전부 7~9월 · 2027 디지털튜터 업무 통합 → 1~2월 모집 유력", "org": "서울 각 초·중·고 (서울교육일자리포털 통계)", "region": "서울", "deadline": null, "pay": "대부분 시급 40,000원 (2026 서울 공고 기준)", "tags": ["시기통계", "AI코디", "2027대비", "서초3곳", "디지털튜터통합"], "url": "https://work.sen.go.kr/work/search/recInfo/BD_selectSrchRecInfo.do", "desc": "📊 2026-11-07 집계 — 서울교육일자리포털에 올라온 올해 공고(마감 포함)를 등록일 기준으로 셈. ■ AI교육 코디네이터 46건: 7월 27건 · 8월 16건 · 9월 3건 (1~6월·10~11월 0건). 첫 공고 7/1, 최대 몰림 7/13~17(16건), 다음 8/11~13(6건)·8/18~24(10건, 2학기 개학 직전), 9월 중순은 재공고. ■ 근무기간: 대부분 8월 중순~9월 초 시작 → 12월 말 종료(2학기 한정). 보수: 금액이 적힌 공고는 대부분 시급 4만원. ■ 서초구: 반포고(7/10)·7/13 공고 1곳·원촌초(8/19) 3곳. 강남·동작·관악도 여럿. ■ 참고 — 디지털튜터(서울 포털): 3건뿐, 2/25·3/3·3/11(1학기 직전), 시급 12,570원. AI·SW 협력강사 144건: 2월 40·3월 26·4월 20(1학기분), 6~8월 40(2학기분). 🔄 2027 변화(사용자 제보 2026-11-07): AI교육 코디네이터는 올해 새로 생긴 직종이고, 내년부터 AI코디를 뽑는 학교는 디지털튜터를 따로 못 뽑으며 AI코디가 디지털튜터 업무까지 함께 맡음 → 그동안 1학기 직전(2~3월)에 뽑던 디지털튜터 자리가 AI코디로 넘어올 가능성이 큼. 디지털튜터 양성과정·AI디지털튜터 수료·스마트폰활용지도사 1급이 그대로 AI코디 지원 강점이 됨(학생 디지털 기기·플랫폼 활용 지원 + 교사 AI 수업 지원 둘 다 할 수 있다는 점을 지원서에 쓸 것). 🔮 내년 전망: 올해 계약이 12월에 끝나므로 2027년에도 사업이 이어지면 1학기 시작 전인 1월 말~2월(협력강사가 2월에 가장 많이 나오는 것과 같은 흐름)에 새로 뽑을 가능성이 큼. 단 올해 처음 2학기에 시작된 사업이라 2027 예산 확정(12월) 여부에 달림 → 12월에 교육청 예산·보도자료 확인, 1월 중순부터 매일 공고 확인, 늦으면 다시 7월. ✅ 준비: 지원서·자기소개 문안(AI 홍보물·카드뉴스·SNS 콘텐츠 강점, 디지털튜터 양성과정·스마트폰활용지도사 1급)을 12월에 미리 만들어 두면 접수 이틀 반짜리 공고에도 바로 지원 가능. AICE Basic(12/18)을 따면 「IT자격증」 요건 보강. 📮 지원 방식: 학교별 직접 채용 · 접수 3~7일(짧으면 이틀 반) · 지원서+개인정보동의서+자격증 사본 → 면접 · 서울교육일자리포털에서 「AI교육 코디네이터」로 검색"},
+{"kind": "채용", "field": "AI·SW", "age": "✅ 재직 중 가능 (주 12시간 안팎 시간제)", "role": "강사", "added": "2026-11-07", "id": "c91", "school": "메모", "title": "📊 [시기 메모] 학교 AI교육 코디네이터 — 올해 서울 46건 전부 7~9월 · 2027 디지털튜터 업무 통합 → 1~2월 모집 유력", "org": "서울 각 초·중·고 (서울교육일자리포털 통계)", "region": "서울", "deadline": null, "pay": "대부분 시급 40,000원 (2026 서울 공고 기준)", "tags": ["시기통계", "AI코디", "2027대비", "서초3곳", "디지털튜터통합"], "url": "https://work.sen.go.kr/work/search/recInfo/BD_selectSrchRecInfo.do", "desc": "📊 2026-11-07 집계 — 서울교육일자리포털에 올라온 올해 공고(마감 포함)를 등록일 기준으로 셈. ■ AI교육 코디네이터 46건: 7월 27건 · 8월 16건 · 9월 3건 (1~6월·10~11월 0건). 첫 공고 7/1, 최대 몰림 7/13~17(16건), 다음 8/11~13(6건)·8/18~24(10건, 2학기 개학 직전), 9월 중순은 재공고. ■ 근무기간: 대부분 8월 중순~9월 초 시작 → 12월 말 종료(2학기 한정). 보수: 금액이 적힌 공고는 대부분 시급 4만원. ■ 서초구: 반포고(7/10)·7/13 공고 1곳·원촌초(8/19) 3곳. 강남·동작·관악도 여럿. ■ 참고 — 디지털튜터(서울 포털): 3건뿐, 2/25·3/3·3/11(1학기 직전), 시급 12,570원. AI·SW 협력강사 144건: 2월 40·3월 26·4월 20(1학기분), 6~8월 40(2학기분). 🔄 2027 변화(사용자 제보 2026-11-07): AI교육 코디네이터는 올해 새로 생긴 직종이고, 내년부터 AI코디를 뽑는 학교는 디지털튜터를 따로 못 뽑으며 AI코디가 디지털튜터 업무까지 함께 맡음 → 그동안 1학기 직전(2~3월)에 뽑던 디지털튜터 자리가 AI코디로 넘어올 가능성이 큼. 디지털튜터 양성과정·AI디지털튜터 수료·스마트폰활용지도사 1급이 그대로 AI코디 지원 강점이 됨(학생 디지털 기기·플랫폼 활용 지원 + 교사 AI 수업 지원 둘 다 할 수 있다는 점을 지원서에 쓸 것). 🔮 내년 전망: 올해 계약이 12월에 끝나므로 2027년에도 사업이 이어지면 1학기 시작 전인 1월 말~2월(협력강사가 2월에 가장 많이 나오는 것과 같은 흐름)에 새로 뽑을 가능성이 큼. 단 올해 처음 2학기에 시작된 사업이라 2027 예산 확정(12월) 여부에 달림 → 12월에 교육청 예산·보도자료 확인, 1월 중순부터 매일 공고 확인, 늦으면 다시 7월. ✅ 준비: 지원서·자기소개 문안(AI 홍보물·카드뉴스·SNS 콘텐츠 강점, 디지털튜터 양성과정·스마트폰활용지도사 1급)을 12월에 미리 만들어 두면 접수 이틀 반짜리 공고에도 바로 지원 가능. AICE Basic(12/18)을 따면 「IT자격증」 요건 보강. 📮 지원 방식: 학교별 직접 채용 · 접수 3~7일(짧으면 이틀 반) · 지원서+개인정보동의서+자격증 사본 → 면접 · 서울교육일자리포털에서 「AI교육 코디네이터」로 검색"},
 {"kind": "교육", "field": "AI·SW", "age": "✅ 중장년(50플러스센터 대상, 만 40세 이상)", "role": "양성과정", "added": "2026-11-08", "id": "c92", "title": "✅ [화·목 0회] 강북50플러스센터 「AI 디지털 아카데미: 캔바 디지털 콘텐츠 강사 양성과정」 — 월·수·금 10회 09:30~12:30 · 12/2~12/23 · 5천원(+자격 발급 10만원) · 🔔 11/16(월) 09:30 접수 시작", "org": "강북50플러스센터", "region": "서울 강북구", "deadline": "2026-12-02", "pay": "수강료 5,000원 · 자격증 발급비 100,000원 별도(캔바디지털콘텐츠강사 2급, 국제디지털콘텐츠협회) · AI 구독료 별도 가능", "tags": ["✅거리예외", "강사양성", "자격증", "캔바", "마케팅·홍보강점", "화목0회", "승인제", "구민특화"], "url": "https://www.50plus.or.kr/education-detail.do?id=78213155&educationKind=centerEducation", "desc": "✅ 화·목 0회 — 12/2(수)·4(금)·7(월)·9(수)·11(금)·14(월)·16(수)·18(금)·21(월)·23(수) 09:30~12:30, 3층 정보e음. ■ 커리큘럼: 캔바 기본 도구·포스터 → 사진 편집·SNS 포스터 → 텍스트·목업(행사·제품 홍보물) → Magic Studio AI 이미지 편집 → 책표지·컬러링북·워크시트 → 캔바 영상(쇼츠·행사 영상) → 포트폴리오 웹사이트. ■ 과제 80% 이상 제출 시 「캔바디지털콘텐츠강사 2급」 발급(10만원). ■ 강사: 전은정(서초50플러스센터 인공지능 전문강사). ■ 왜 추천: AI 홍보물·카드뉴스·SNS 콘텐츠 강점과 정확히 겹치고, 강사 자격증까지 나와 학교 AI코디·평생학습관 강의 이력에 바로 씀. ■ 주의: 제목에 「강북구민 특화」 — 강북구민 우선 승인일 수 있으니 접수 전 센터(070-7791-9701)에 서초구민 가능 여부 문의. 유료 승인제 → 11/16 09:30 열리면 즉시 신청. 서초에서 편도 약 60분이지만 자격증·강사양성이라 거리 예외. 12월 평일 오전 10회라 디지털튜터 양성과정(주말)과는 안 겹침."},
 {"kind": "교육", "field": "AI·SW", "age": "✅ 중장년(50플러스센터 대상)", "role": "양성과정", "added": "2026-11-08", "id": "c93", "title": "⚠️ 서초에서 편도 약 60분 · 강북50플러스센터 「AI로 키우는 내 블로그! 수익형 블로그 N잡러 과정」 — 수·금 8회 16:30~19:30 · 11/27~12/23 · 3만원 · 🔔 11/9(월) 09:30 접수 시작", "org": "강북50플러스센터", "region": "서울 강북구", "deadline": "2026-11-20", "pay": "30,000원 (8회, 회당 3,750원) · 추가비용 없음", "tags": ["⚠️거리주의", "화목0회", "마케팅·홍보강점", "블로그", "승인제"], "url": "https://www.50plus.or.kr/education-detail.do?id=78384565&educationKind=centerEducation", "desc": "✅ 화·목 0회 — 11/27(금)·12/2(수)·4(금)·9(수)·11(금)·16(수)·18(금)·23(수) 16:30~19:30. ■ 내용: 블로그 기획·네이버 검색 상위노출(SEO·AEO·GEO) → 네이버 쇼핑커넥트·클립 숏폼 → 이웃 늘리기 → 애드포스트·체험단 수익화 → 통계 관리. 강사 조미영(아모레퍼시픽 출신, 공공기관 AI 디지털·SNS 마케팅 강의). ■ 블로그 콘텐츠 강점을 강의 소재로 다듬는 데 도움. 단 강사양성·자격 과정이 아니라 거리 예외 아님 → 순위 낮춤. 평일 저녁 16:30~19:30이라 강북까지 왕복 2시간 부담. 가까운 대안은 c92(같은 센터 캔바 콘텐츠 강사 과정, 자격증 有)와 서초·동작 센터 AI 강좌. ■ 우선승인 방식(선착순 아님), 신청자 많으면 조기 마감. 문의 070-7791-3556."},
 {"kind": "교육", "field": "AI·SW", "age": "✅ 4050 대상(금천50플러스센터 4050직업역량강화) — 만 44세 해당", "role": "양성과정", "added": "2026-11-06", "id": "c89", "intake": "승인제(접수→심사 후 선정→입금) · 정원 12명 · 접수 ~11/06(금) 18시", "title": "※ 마감됨(11/06) · ✅ [화·목 0회] 금천50플러스센터 「드론 강사 양성과정」 — 토요일 4회 10~12시 · 11/7~11/28 · 2만원(+체험비 2.5만) · 11/06 18시 마감", "org": "서울시50플러스재단 금천50플러스센터", "region": "서울 금천", "deadline": "2026-11-06", "pay": "유료 20,000원 + 추가 25,000원(교육원 체험·드론 기체 사용료) · 회당 약 1.1만원", "tags": ["✅거리예외", "강사양성", "드론", "STEM", "AI강의계획서", "토요일", "승인제", "50플러스센터교육"], "url": "https://www.50plus.or.kr/education-detail.do?id=77758739&educationKind=centerEducation", "desc": "✅ 화·목 0회 — 토요일 4회 10:00~12:00 (11/7·14·21·28). ⚠️ 1회차 11/7(토)은 디지털튜터 양성과정 대면연수 확정일과 겹침 → 대면연수가 1순위라 1회차는 빠지게 될 가능성이 큼(빠지면 「드론 구성·비행 원리·조종 기초」를 놓침 — 수료 기준 출석률은 센터에 확인). 장소 금천50플러스센터 4층 열림터, 마지막 회차(11/28)는 광명시 드론교육원 현장 견학·조종 체험. 강사 김용두. 커리큘럼: ①드론 이해·조종법 ②항공법규·비행 안전·교육생 맞춤 비행 교수법(eDrone) ③조종 능력 향상·항공 촬영 + AI로 강의계획서·PPT 만들기 ④현장 실습. 「강사 양성」 과정이라 거리예외(금천 — 서초에서 편도 약 40~50분). 학교 방과후·늘봄의 드론/코딩드론 강좌는 AI·SW 강사와 겹치는 수요가 있어 강의 메뉴를 넓히는 용도. 비용은 체험비 포함 4.5만원으로 회당 1만원을 조금 넘음. 승인제라 오늘 18시 전에 신청해야 함."},
@@ -266,7 +287,7 @@ const SEED = [
 {id:'c63', intake:'접수→선정→입금 · 동작구민 70% / 타구민 30%', kind:'교육', field:'AI·SW', age:'✅ 만 40~64세 (동작50플러스센터)', title:'※ 마감됨(10/18) · ⚠️ 화·목 4회 전부 — 운동일 충돌 · 동작50플러스센터 「중장년 AI 마스터과정 - 초급 3기」 (대안: 같은 센터 중급 1기 c64 월수금)', org:'서울시50플러스재단 동작50플러스센터', region:'서울 동작 (✅ 서초에서 편도 45분 이내)', role:'양성과정', deadline:'2026-10-18', pay:'30,000원 · 정원 20명', added:'2026-10-10', tags:['✅거리OK','동작센터','화목4회','운동일충돌','요일확인완료','AI','채널②','유료','추천안함'], url:'https://www.50plus.or.kr/djc/education-detail.do?id=77685935&educationKind=centerEducation', desc:'🏃 화·목 4회 / 4회 = 100% 충돌 — 10/20(화)·10/22(목)·10/27(화)·10/29(목) 각 10:00~13:00, 세움둥지. 초급 2기(c35)와 같은 구조라 추천하지 않음. 같은 주제를 월수금으로 듣고 싶으면 중급 1기(c64)가 대안. 모집 ~10/18.'},
 {id:'c62', intake:'대기신청 상태 — 모집 12명에 신청 14명(승인 11명) · 접수 ~10/12 · 안드로이드 폰 필수', kind:'교육', field:'스마트폰', age:'✅ 만 40세 이상 (성동50플러스센터 · 재직 병행 가능)', title:'※ 마감됨 ✅ [화·목 0회] 성동50플러스센터 「스마트폰AI활용지도사 자격과정」 — 월·금 6회 15~17시 · 대기신청 (성북 c43과 같은 자격)', org:'서울시50플러스재단 성동50플러스센터 (왕십리로 241 서울숲 더샵 3층)', region:'서울 성동 (서초에서 편도 약 45~50분 · 자격증+강사양성이라 거리예외 적용)', role:'양성과정', deadline:'2026-10-12', pay:'수강료 50,000원 + 자격증 발급비 80,000원 = 130,000원 · 정원 12명', added:'2026-10-10', tags:['✅거리예외','자격증','강사양성','화목0회','요일확인완료','스마트폰','대기신청','성동센터','채널②','안드로이드'], url:'https://www.50plus.or.kr/sdc/education-detail.do?id=76795030&educationKind=centerEducation', desc:'🏃 화·목 0회 — 6회 전부 월·금 15:00~17:00: 10/12(월)·10/16(금)·10/19(월)·10/23(금)·10/26(월)·10/30(금). 장소 정보화교실. 강사 유선주(스마트폰·AI 강사양성 경력). 안드로이드 전용(아이폰 불가). 1회차가 모레(10/12)라 이미 정원 초과(대기신청) — 성북 c43(수요일 6회·11만원·시강 피드백 포함)이 더 이른 자리·저렴·시강 포함이라 c43을 1순위로 두고, 성동은 c43을 놓칠 때의 대안으로만 볼 것. 지도사 1급 보유자라 자격이 겹치므로 두 곳 모두 듣는 것은 비권장. 🔍 성동센터 강좌 목록 신규 소스(org=sdc)에서 발견.'},
 {id:'c65', intake:'선착순 · 접수 ~10/11 23:59(내일)', kind:'교육', field:'AI·SW', age:'✅ 만 40~64세 (서울시50플러스재단 서부캠퍼스 · AI디지털교육 AI중급)', title:'※ 마감됨 ⚠️ 서초에서 편도 약 60분 · 요일미표시 · 서부캠퍼스(은평) 「[AI디지털교육] AI로 엑셀, 파워포인트 쉽게 만들고 정리하기」 — 4회 · 24,000원 · 오늘(10/11) 마감', org:'서울시50플러스재단 서부캠퍼스 (은평)', region:'서울 은평 (⚠️ 서초에서 편도 약 60분)', role:'양성과정', deadline:'2026-10-11', pay:'24,000원 · 4회', added:'2026-10-10', tags:['⚠️거리주의','요일미표시','서부캠퍼스','AI','채널③','유료','선착순'], url:'https://www.50plus.or.kr/aiDigital.do?viewCount=100&state=JOIN&cost=ALL&term=&type=ALL', desc:'교육기간 10/12~11/2(4회) · 모집 ~10/11. 회차별 요일은 상세페이지가 캠퍼스 코드로 열리지 않아 확인하지 못함 → 요일 미표시 → 기관 확인 필요, 화·목 회차를 먼저 센 뒤 판단. 거리 때문에 순위를 내림: 같은 계열 과정은 중부(공덕·거리OK) c36/c40 쪽을 우선. 문서 자동화 성격이라 강사 이력 값어치는 중간. 같은 캠퍼스의 「AI로 웹사이트, 앱 개발해보기」(AI중급 4회 24,000원, 11/3~11/24, 모집 ~11/2)도 동일 조건(요일미표시·거리주의)으로 모집 중 — 🔍 AI 키워드 검색에는 안 잡히고 aiDigital 채널 전수 조사에서만 보임.'},
-{id:'dt19', kind:'채용', field:'AI·SW', age:'연령 무관 (상세요강 확인)', title:'※ 마감됨(10/30) · 서울전농초등학교 2026학년도 스마트튜터 (서울 동대문 · 11/1~2027.2/28)', org:'서울전농초등학교 (서울시교육청)', region:'서울 동대문',
+{id:'dt19', school:'스마트튜터', kind:'채용', field:'AI·SW', age:'연령 무관 (상세요강 확인)', title:'※ 마감됨(10/30) · 서울전농초등학교 2026학년도 스마트튜터 (서울 동대문 · 11/1~2027.2/28)', org:'서울전농초등학교 (서울시교육청)', region:'서울 동대문',
  role:'보조강사', deadline:'2026-10-30', pay:'공고에 보수 미표시 (첨부 공고문 확인)', added:'2026-10-26',
  tags:['학교','스마트튜터','서울','초등학교','요일미표시','접수중','서울교육일자리포털'],
  url:'https://work.sen.go.kr/work/search/recInfo/BD_selectRecDetail.do?q_rcrtSn=112741',
@@ -400,12 +421,12 @@ const SEED = [
  tags:['학교','AI교육','서울','초등학교','5학년','접수예정','서울교육일자리포털','요일미표시'],
  url:'https://work.sen.go.kr/work/search/recInfo/BD_selectRecDetail.do?q_rcrtSn=111785',
  desc:'접수 2026-10-12(월) 00:01 ~ 10-15(목) 23:59, 이메일 접수(sks1919@sen.go.kr), 1명. 채용기간 2026-11-01~12-31, 근무시간 「주중 08:50~14:30」. ⚠️ 요일 미표시 → 첨부 공고문(hwpx) 또는 학교(02-372-3044)에 요일·시수 확인 필요 — 「주중」 상시이면 화·목이 포함되어 운동일 충돌 가능, 5학년 AI중점학교 협력수업이라 특정 요일 배정일 수도 있음. 서대문 소재(서초에서 편도 약 50분)이나 채용은 거리 규칙 비적용. 디지털튜터 강사형 수료·AI 교육 이력에 부합. 🔍 서울교육일자리포털 매일 점검에서 발견.'},
-{id:'dt14', kind:'채용', field:'AI·SW', age:'연령 무관 (상세요강 확인)', title:'※ 마감됨 ⚠️ 화·목 100% 운동일 충돌 · 휘경여자고등학교 스마트튜터 봉사자 위촉 (서울 동대문 · 10/11 마감)', org:'휘경여자고등학교 (서울시교육청)', region:'서울 동대문',
+{id:'dt14', school:'스마트튜터', kind:'채용', field:'AI·SW', age:'연령 무관 (상세요강 확인)', title:'※ 마감됨 ⚠️ 화·목 100% 운동일 충돌 · 휘경여자고등학교 스마트튜터 봉사자 위촉 (서울 동대문 · 10/11 마감)', org:'휘경여자고등학교 (서울시교육청)', region:'서울 동대문',
  role:'보조강사', deadline:'2026-10-11', pay:'시급 15,000원 (주 14시간)', added:'2026-10-07',
  tags:['학교','스마트튜터','서울','고등학교','⚠️화목충돌','접수중','서울교육일자리포털'],
  url:'https://work.sen.go.kr/work/search/recInfo/BD_selectRecDetail.do?q_rcrtSn=111441',
  desc:'접수 2026-10-07~10-11, 이메일 접수(info@hwikyung.sen.hs.kr), 1명. 근무 화·목 08:00~16:00(휴게 1시간, 주 14시간) — 근무일이 전부 화·목이라 운동일과 100% 충돌, 평일 8~16시 상주형이라 재택 병행도 어려움. 강사가 아닌 수업 보조 성격. 지원은 비추천. 🔍 왜 놓쳤나: 서울교육일자리포털(work.sen.go.kr)은 SOURCES에 있었지만 매일 점검 목록에 빠져 있어 학교 단기 공고를 못 봤음 → 이후 매일 확인 대상에 포함.'},
-{id:'dt13', kind:'채용', field:'AI·SW', age:'연령 무관', title:'※ 마감됨(10/8) — 2026학년도 디지털튜터 추가 채용 (경기 부천중학교)', org:'부천중학교 (경기도교육청)', region:'경기 부천',
+{id:'dt13', school:'디지털튜터', kind:'채용', field:'AI·SW', age:'연령 무관', title:'※ 마감됨(10/8) — 2026학년도 디지털튜터 추가 채용 (경기 부천중학교)', org:'부천중학교 (경기도교육청)', region:'경기 부천',
  role:'강사·보조강사', deadline:'2026-10-08', pay:'학교 시간강사료 (공고 참조)', added:'2026-10-07',
  tags:['학교','디지털튜터','경기','중학교','단기','접수중','마감임박'],
  url:'https://dt.kosac.re.kr/dt/empmn/list/454',
@@ -488,7 +509,7 @@ const SEED = [
  url:'https://dt.kosac.re.kr/dt/empmn/list/454',
  desc:'⭐ 실질적으로 물량이 가장 많은 창구. 전국 초·중·고가 디지털튜터/AI교육 코디네이터를 상시 올립니다 (2026-09-13 기준 1,247건 누적). 사이트에서 지역을 서울·인천·경기로 필터링하세요. 접수기간이 5~7일로 짧아 주 1회 이상 확인 필수. 최근 수도권 예: 소래중(경기), 양곡고(김포), 매원고(수원).'},
 
-{id:'s17', kind:'채용', field:'AI·SW', age:'연령 무관', title:'🔴 지금 할 일 — 디지털튜터 인력풀 등록 (양성과정 최종합격 · 상시)', org:'교육부 · 한국과학창의재단(KOSAC)', region:'전국',
+{id:'s17', school:'상시등록', kind:'채용', field:'AI·SW', age:'연령 무관', title:'🔴 지금 할 일 — 디지털튜터 인력풀 등록 (양성과정 최종합격 · 상시)', org:'교육부 · 한국과학창의재단(KOSAC)', region:'전국',
  role:'강사·보조강사', deadline:null, pay:'매칭 시 협의', added:'2026-08-12',
  tags:['지금하기','상시등록','인력풀','학교매칭','양성과정연계'],
  url:'https://dt.kosac.re.kr/dt/mnpw/registration/guide/457',
@@ -946,6 +967,18 @@ const SOURCES = [
 {"n":"EO Planet(이오플래닛) · 매거진 — 에이블런 등 교육기업의 AI디지털배움터 강사·보조강사 모집글이 올라오는 커뮤니티","d":"서울·인천 · 2026-10-21 신규 발굴. 에이블런이 「26년 인천 AI 디지털 배움터 강사/보조강사/가이드 모집」(eopla.net/magazines/41742·42288)을 이곳에도 게시. 매거진 목록은 일반 스타트업·커뮤니티 글이 섞여 있어 밀도는 낮으니 「#모집/홍보」 글 중 강사·배움터 키워드만 훑을 것. 최신순 목록이 열리는 것 확인.","u":"https://eopla.net/magazines"},
 ];
 
+/* 학교 AI코디·디지털튜터 공고 소스 — 매일 전부 확인 (새 소스는 added 날짜와 함께 추가) */
+const SCHOOL_SOURCES = [
+ {n:'⭐ 서울교육일자리포털 채용공고', d:'서울 학교 AI교육 코디네이터·스마트튜터·디지털튜터 공고가 가장 많이 올라오는 곳(2026년 AI코디 46건). 「AI교육 코디네이터」「코디」「튜터」로 검색 · 접수 3~7일', u:'https://work.sen.go.kr/work/search/recInfo/BD_selectSrchRecInfo.do', added:'2026-10-07'},
+ {n:'서울교육일자리포털 · 채용계획 사전 공개', d:'공고 전에 채용계획을 먼저 올리는 게시판(주로 기간제교원). AI코디·튜터 계획이 보이면 공고 전에 준비 시작', u:'https://work.sen.go.kr/user/bbs/BD_selectBbsList.do?q_bbsSn=1467', added:'2026-11-08'},
+ {n:'⭐ 디지털튜터 누리집 · 채용공고', d:'교육부·한국과학창의재단. 전국 학교 디지털튜터·AI코디 공고 — 지역 서울·인천·경기로 필터', u:'https://dt.kosac.re.kr/dt/empmn/list/454', added:'2026-09-13'},
+ {n:'디지털튜터 누리집 · 인력풀 등록', d:'공고를 기다리지 않고 먼저 등록 → 학교가 이수자 정보를 보고 연락(상시)', u:'https://dt.kosac.re.kr/dt/mnpw/registration/guide/457', added:'2026-09-18'},
+ {n:'⭐ 경기도교육청 구인정보', d:'경기 학교 AI교육 코디네이터·디지털튜터 공고(예: 평택 현화고). 직종 「기타」「초중등시간강사」 확인', u:'https://www.goe.go.kr/recruit/ad/func/pb/hnfpPbancList.do?mi=10502', added:'2026-11-01'},
+ {n:'⭐ 인천광역시교육청 채용공고', d:'인천 학교 AI코디(산곡북초·부흥고·서창초·석암초·박문중·영종초)·디지털튜터 공고. 「모집중」만 보면 됨', u:'https://www.ice.go.kr/ice/na/ntt/selectNttList.do?mi=10994&bbsId=1981', added:'2026-11-01'},
+ {n:'🆕 인천일자리포털 · 공공일자리', d:'「인천시교육청 학교지원단 디지털튜터 채용 위탁 공고」처럼 교육청이 한꺼번에 뽑는 디지털튜터 공고가 올라옴(학기 시작 전)', u:'https://www.incheon.go.kr/job/JOB010201', added:'2026-11-08'},
+ {n:'🆕 연수구 일자리 · 공공분야 채용정보', d:'인천 연수구 학교들이 AI코디 공고를 함께 올림(예: 박문중 AI코디네이터, 연수여고 디지털튜터)', u:'https://www.yeonsu.go.kr/job/employment/public.asp', added:'2026-11-08'},
+];
+
 /* 내 프로필 — 활동 가능 지역 서울·경기·인천 */
 const ME = { myRegions:['서울','경기','인천','전국','온라인'] };
 /* 만 나이만 관리 (기준일 이후 자동 증가) */
@@ -1025,6 +1058,7 @@ document.addEventListener('click', e=>{
 /* ── 렌더 ── */
 function filtered(){
   let list = all().filter(j=>{
+    if(isSchool(j)) return false;
     const st = statusOf(j);
     if(F.kind!=='전체' && (j.kind||'채용')!==F.kind) return false;
     if(F.field!=='전체' && (j.field||'AI·SW')!==F.field) return false;
@@ -1098,6 +1132,38 @@ function badgeInfo(j){
   return {st, cls, txt: st==='임박'?'⏰ '+dtxt:dtxt};
 }
 
+
+/* 학교 AI코디·디지털튜터 섹션 */
+const SCHOOL_KW=/AI\s*(교육\s*)?코디|디지털\s*튜터|스마트\s*튜터/;
+function isSchool(j){ return !!j.school || (j.custom && SCHOOL_KW.test(j.title||'') && /학교|초등|중학|고등/.test((j.org||'')+(j.title||''))); }
+function schoolCard(j, hot){
+  const b = badgeInfo(j);
+  return `<div class="card compact${hot?' hot':''}${saved[j.id]?' saved':''}" data-open="${j.id}" role="button" tabindex="0">
+    <div class="mini">
+      ${hot?'<span class="b open">🔥 최우선 지원</span>':''}
+      <span class="b ${b.cls}">${b.txt}</span>
+      ${j.school&&j.school!=='메모'&&j.school!=='상시등록'?`<span class="b tag">${esc(j.school)}</span>`:''}
+      ${saved[j.id]?'<span class="star-on">★</span>':''}
+      ${(memos[j.id]||'').trim()?'<span class="memo-has">📝</span>':''}
+    </div>
+    <div class="ttl">${esc(j.title)}</div>
+    ${j.work?`<div class="work">근무 ${esc(j.work)}</div>`:''}
+  </div>`;
+}
+function renderSchool(){
+  const a = all().filter(isSchool);
+  const open = a.filter(j=>j.deadline && statusOf(j)!=='마감').sort((x,y)=>x.deadline.localeCompare(y.deadline));
+  const always = a.filter(j=>!j.deadline);
+  const past = a.filter(j=>j.deadline && statusOf(j)==='마감').sort((x,y)=>y.deadline.localeCompare(x.deadline));
+  document.getElementById('schoolOpen').innerHTML = open.length ? open.map(j=>schoolCard(j,true)).join('')
+    : `<div class="none">지금 모집 중인 학교 AI코디·디지털튜터 공고는 없습니다. 아래 소스 ${SCHOOL_SOURCES.length}곳을 매일 확인 중이에요 (마지막 확인 ${esc(UPDATED_AT)}).<br>올해 서울 AI코디는 7~9월에 몰렸고, 2027년엔 디지털튜터 업무가 AI코디로 합쳐져 <b>1월 말~2월</b> 모집이 유력합니다.</div>`;
+  document.getElementById('schoolAlways').innerHTML = always.map(j=>schoolCard(j,false)).join('');
+  document.getElementById('schoolPast').innerHTML = past.map(j=>schoolCard(j,false)).join('');
+  document.getElementById('schoolPastSum').textContent = `🗂 지난 학교 공고 (${past.length}건) — 눌러서 펼치기`;
+  document.getElementById('schoolSources').innerHTML = SCHOOL_SOURCES.map(x=>
+    `<a class="src" href="${x.u}" target="_blank" rel="noopener"><b>${x.n}</b><small>${x.d}</small></a>`).join('');
+}
+
 /* 목록: 제목만 간결하게 — 세부 내용·링크는 카드를 누르면 열리는 창에서 */
 function render(){
   const list = filtered();
@@ -1117,6 +1183,7 @@ function render(){
     </div>`;
   }).join('');
   renderStats();
+  renderSchool();
   if(detailId && document.getElementById('detail').open) showDetail(detailId);
 }
 
